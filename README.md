@@ -38,3 +38,14 @@ Mi tesis de grado
 
     -> Ipv4 Disponibles
     -> Ipv6 Disponibles
+    
+## Mapeo del sitio
+
+ Mapa del sitio web
+ 
+    
+    /Home
+    /Login
+          /sistema-home
+          /ipv4-ipv6
+          /
