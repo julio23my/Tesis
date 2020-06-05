@@ -35,22 +35,37 @@
     <link rel="stylesheet" href="{% static 'assets/css/Team-Clean.css' %}">
 </head>
 
-<body>
-<h3> Register</h3>
+<body style="background-color: #313437;">
+<div class="login-clean" style="background-color: #313437;">
+
    <form method="POST" action="">
        {% csrf_token %}
-       {{ form.as_p }}
+       <h2 class="sr-only">Registesr</h2>
 
-
-       <input type="submit" name="Create User">
+            <div class="illustration"><i class="icon ion-ios-navigate" style="color: #ffc107;"></i></div>
+            <div class="form-group">{{ form.username }}</div>
+            <div class="form-group">{{ form.email }}</div>
+            <div class="form-group">{{ form.password1 }}</div>
+            <div class="form-group">{{ form.password2 }}</div>
+            <div class="form-group"></div>
+            <div class="form-group"><input class="btn btn-warning btn-block" type="submit" ></input></div>
    </form>
+<script>
 
-
-
-
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder="Username.."
+    form_fields[2].placeholder="Email.."
+    form_fields[3].placeholder="Enter Password"
+    form_fields[4].placeholder="Confirm Password"
+    form_fields[1].className='form-control'
+    form_fields[2].className='form-control'
+    form_fields[3].className='form-control'
+    form_fields[4].className='form-control'
+</script>
 
     <script src="{% static 'assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</div>
 </body>
 
 </html>
