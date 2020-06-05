@@ -43,9 +43,10 @@ Mi tesis de grado
 
  Mapa del sitio web
  
-    
-    /Home
+    /admin
+    /home
     /Login
           /sistema-home
           /ipv4-ipv6
           /
+    /registration
