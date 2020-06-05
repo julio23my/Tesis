@@ -1,0 +1,7 @@
+django==2.2
+napalm
+netmiko
+gunicorn
+numpy
+pandas
+
