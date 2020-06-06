@@ -1,0 +1,8 @@
+.sidebar .nav-item .nav-link span {
+  color: white;
+}
+
+.sidebar-dark .nav-item .nav-link i {
+  color: #ffc107;
+}
+

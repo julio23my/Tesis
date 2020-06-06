@@ -22,8 +22,11 @@ Mi tesis de grado
 
 2.- Usuarios
 
-    -> Crear modelo
+    -> Crear modelo (se utilizo el basico por ahora)
         -> Privilegio, Acceso a dispositivos
+    -> Crear login page *
+    -> Crear registration page *
+    -> Limitar acceso *
 
 3.- Dispositivos
 
@@ -38,6 +41,7 @@ Mi tesis de grado
 
     -> Ipv4 Disponibles
     -> Ipv6 Disponibles
+    -> Equipos
     
 ## Mapeo del sitio
 
@@ -48,5 +52,5 @@ Mi tesis de grado
     /Login
           /sistema-home
           /ipv4-ipv6
-          /
-    /registration
+          /homesystem
+          /registration

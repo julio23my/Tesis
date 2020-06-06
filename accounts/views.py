@@ -6,23 +6,24 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home_view(request):
     context = {}
-    return render(request, 'home.html', context)
+    return render(request, 'accounts/home.html', context)
 
 def LoginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
-    if request.method =='POST':
-        usernames = request.POST['username']
-        passwords = request.POST['password']
-        user = authenticate(request, username=usernames, password=passwords)
-        if user is not None:
-            login(request, user)
-            # Redirect to a success page.
-            return redirect('home')
-        else:
-            messages.info(request, 'Username or Password is Wrong')
-    context = {}
-    return render(request, 'login.html',context)
+    else:
+        if request.method =='POST':
+            usernames = request.POST['username']
+            passwords = request.POST['password']
+            user = authenticate(request, username=usernames, password=passwords)
+            if user is not None:
+                login(request, user)
+                # Redirect to a success page.
+                return redirect('home')
+            else:
+                messages.info(request, 'Username or Password is Wrong')
+        context = {}
+        return render(request, 'accounts/login.html',context)
 def LogoutUser(request):
     logout(request)
     return redirect('login')
@@ -38,8 +39,8 @@ def registration(request):
             messages.success(request, 'La cuenta fue Creada '+ user)
             return redirect('login')
     context = {'form':form}
-    return render(request, 'registration.html',context)
+    return render(request, 'accounts/registration.html',context)
 
 def HomeSystem(request):
     context = {}
-    return render(request, 'homesystem.html', context)
+    return render(request, 'accounts/homesystem.html', context)
