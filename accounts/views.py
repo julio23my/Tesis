@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -40,3 +39,7 @@ def registration(request):
             return redirect('login')
     context = {'form':form}
     return render(request, 'registration.html',context)
+
+def HomeSystem(request):
+    context = {}
+    return render(request, 'homesystem.html', context)
