@@ -6,3 +6,6 @@
   color: #ffc107;
 }
 
+.dropdown .dropdown-list .dropdown-header {
+  background-color: #5a5c69!important;
+}

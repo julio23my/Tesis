@@ -19,14 +19,15 @@ def LoginPage(request):
             if user is not None:
                 login(request, user)
                 # Redirect to a success page.
-                return redirect('home')
+                return redirect('system')
             else:
                 messages.info(request, 'Username or Password is Wrong')
         context = {}
         return render(request, 'accounts/login.html',context)
+
 def LogoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')
 
 @login_required(login_url='login')
 def registration(request):

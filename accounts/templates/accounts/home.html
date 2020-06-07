@@ -9,29 +9,17 @@
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Features-Boxed.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Footer-Basic.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Footer-Dark.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Highlight-Clean.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Navigation-with-Button.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Team-Boxed.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/Team-Clean.css' %}">
 </head>
 
@@ -41,7 +29,7 @@
             <div class="container"><a class="navbar-brand" href="#">TelecomSystemAdmin</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse"
                     id="navcol-1">
-                    <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> <a class="btn btn-light bg-warning action-button" role="button" href="login.html">Login</a></span></div>
+                    <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"> <a class="btn btn-light bg-warning action-button" role="button" href='{% url 'login' %}'>Login</a></span></div>
             </div>
         </nav>
     </div>
