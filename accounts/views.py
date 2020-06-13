@@ -49,3 +49,8 @@ def registration(request):
 def HomeSystem(request):
     context = {}
     return render(request, 'accounts/homesystem.html', context)
+
+@login_required(login_url='login')
+def SendConfiguration(request):
+    context = {}
+    return render(request, 'accounts/sendconf.html', context)
