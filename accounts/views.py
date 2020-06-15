@@ -1,17 +1,19 @@
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm
+from .forms import *
 from .decorators import unauthenticated_user
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
-
+from .models import *
+# import netmiko
+# import napalm
 
 
 # Create your views here.
 def home_view(request):
     context = {}
     return render(request, 'accounts/home.html', context)
+
 
 @unauthenticated_user
 def LoginPage(request):
@@ -28,9 +30,11 @@ def LoginPage(request):
     context = {}
     return render(request, 'accounts/login.html',context)
 
+
 def LogoutUser(request):
     logout(request)
     return redirect('home')
+
 
 @login_required(login_url='login')
 def registration(request):
@@ -45,12 +49,39 @@ def registration(request):
     context = {'form':form}
     return render(request, 'accounts/registration.html',context)
 
+
 @login_required(login_url='login')
 def HomeSystem(request):
-    context = {}
+    countsr = Device.objects.filter(dvt='R').count()
+    countsw = Device.objects.filter(dvt='SW').count()
+    countse = Device.objects.filter(dvt='ED').count()
+    countsrw = Device.objects.filter(dvt='RW').count()
+    context = {
+        'router':countsr,
+        'switch':countsw,
+        'endev': countse,
+        'wifi':countsrw,
+
+    }
     return render(request, 'accounts/homesystem.html', context)
+
 
 @login_required(login_url='login')
 def SendConfiguration(request):
     context = {}
     return render(request, 'accounts/sendconf.html', context)
+
+
+@login_required(login_url='login')
+def IPv4toIPv6In(request):
+    form = SegmentacionForm(request.POST)
+    if form.is_valid():
+        obj = form.save()
+        obj.user = request.user
+        obj.save()
+        form = SegmentacionForm()
+        print(obj.rango)
+    context = {
+        "form": form
+    }
+    return render(request, 'accounts/ipv4toipv6.html', context)

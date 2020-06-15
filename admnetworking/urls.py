@@ -23,5 +23,6 @@ urlpatterns = [
     path('login/', views.LoginPage, name='login'),
     path('logout/', views.LogoutUser, name='logout'),
     path('registration/', views.registration, name='registration'),
-    path('system', views.HomeSystem, name='system')
+    path('system', views.HomeSystem, name='system'),
+    path('ipv4-to-ipv6/',views.IPv4toIPv6In, name='ipv4-to-ipv6')
 ]
