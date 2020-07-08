@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .decorators import unauthenticated_user
 from django.contrib import messages
@@ -56,11 +56,13 @@ def HomeSystem(request):
     countsw = Device.objects.filter(dvt='SW').count()
     countse = Device.objects.filter(dvt='ED').count()
     countsrw = Device.objects.filter(dvt='RW').count()
+    solicitud = Solicitudes.objects.filter(completa=False).all()
     context = {
         'router':countsr,
         'switch':countsw,
         'endev': countse,
         'wifi':countsrw,
+        'solicitudes':solicitud
 
     }
     return render(request, 'accounts/homesystem.html', context)
@@ -85,3 +87,25 @@ def IPv4toIPv6In(request):
         "form": form
     }
     return render(request, 'accounts/ipv4toipv6.html', context)
+
+@login_required(login_url='login')
+def Solicitudcrear(request):
+    form = SolicitudForm(request.POST)
+    if form.is_valid():
+        obj = form.save()
+        obj.user = request.user
+        obj.save()
+        form = SolicitudForm()
+    context = {
+        "form": form
+    }
+    return render(request, 'accounts/solicitud.html', context)
+
+
+@login_required(login_url='login')
+def Solicitudver(request, pk):
+    obj = get_object_or_404(Solicitudes, pk=pk)
+    context = {
+        "objeto": obj
+    }
+    return render(request, 'accounts/solicitud-vista.html', context)

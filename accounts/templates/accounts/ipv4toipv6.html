@@ -1,13 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'form.html' %}
+{% load widget_tweaks %}
 {% block head_title %} Segmentacion{% endblock %}
 {% block title_page %} Segmentacion{% endblock %}
+
+
 {% block content %}
 
+<div class="row">
+<div class="col-lg-6 mb-4">
 
 <form method='POST' action='.' enctype='multipart/form-data'> {% csrf_token %}
-    {{ form.as_p }}
-    <button type='submit'>Send</button>
+    <div class="form-group">{% render_field form.rango class="form-control" placeholder="Rango IP" type="text" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])/*$"%}</div>
+    <div class="form-group">{% render_field form.mascara class="form-control" placeholder="Mascara IP 255.255.255.0" %}</div>
+    <div class="form-group">{% render_field form.direccion class="form-control" placeholder="Direcciones" %}</div>
+    <div class="form-group">{% render_field form.subredes class="form-control" placeholder="Sub Redes" %}</div>
+    <div class="form-group">{% render_field form.reserv class="form-control" placeholder="IP Reservadas" %}</div>
+
+    <div class="form-group"><input class="btn btn-warning btn-block" type="submit" value="Segmentacion"></input></div>
 </form>
+</div>
+</div>
 
 
 

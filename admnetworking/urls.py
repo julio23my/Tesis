@@ -24,5 +24,7 @@ urlpatterns = [
     path('logout/', views.LogoutUser, name='logout'),
     path('registration/', views.registration, name='registration'),
     path('system', views.HomeSystem, name='system'),
-    path('ipv4-to-ipv6/',views.IPv4toIPv6In, name='ipv4-to-ipv6')
+    path('ipv4-to-ipv6/',views.IPv4toIPv6In, name='ipv4-to-ipv6'),
+    path('solicitud-usuario/', views.Solicitudcrear, name='Solicitud-Usuario-crear'),
+    path('solicitud-usuario/<int:pk>', views.Solicitudver, name='Solicitud-Usuario-ver')
 ]

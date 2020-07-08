@@ -14,3 +14,13 @@ class SegmentacionForm(forms.ModelForm):
         model = Segmento
         fields = ['rango', 'mascara', 'direccion', 'subredes', 'reserv']
 
+class SolicitudForm(forms.ModelForm):
+    class Meta:
+        model = Solicitudes
+        fields = ['usuario','solicitud','descripcion','ubicacion']
+
+
+class ReservaripForm(forms.ModelForm):
+    class Meta:
+        model = IpReservada
+        fields = ['ipv4','ipv6','mac','descripcion','dispositivo']

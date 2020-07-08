@@ -10,3 +10,7 @@ class DeviceAdmin(admin.ModelAdmin):
         PuertoInline,
     ]
 admin.site.register(Device, DeviceAdmin)
+admin.site.register(Segmento)
+admin.site.register(Ubicacion)
+admin.site.register(Solicitudes)
+admin.site.register(IpReservada)

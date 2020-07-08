@@ -8,8 +8,8 @@
     <h3>{{ title }}</h3>
 {% endif %}
 
-<form method='POST' action='.' enctype='multipart/form-data'> {% csrf_token %}
-    {{ form.as_p }}
+<form method='POST' action='.' enctype='multipart/form-data'>
+
     <button type='submit'>Send</button>
 </form>
 

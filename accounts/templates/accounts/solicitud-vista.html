@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block head_title %} Solicitud {% endblock %}
+{% block title_page %} Solicitud de usuario{% endblock %}
+
+
+{% block content %}
+<h3>{{ objeto.pk }}</h3>
+<span>{{ objeto.usuario }}</span>
+   <h4> {{ objeto.solicitud }}</h4>
+{{ objeto.descripcion}}
+
+
+
+
+
+{% endblock %}
