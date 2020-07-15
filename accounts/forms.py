@@ -17,10 +17,15 @@ class SegmentacionForm(forms.ModelForm):
 class SolicitudForm(forms.ModelForm):
     class Meta:
         model = Solicitudes
-        fields = ['usuario','solicitud','descripcion','ubicacion']
+        fields = ['usuario','solicitud','descripcion','ubicacion','completa']
 
 
 class ReservaripForm(forms.ModelForm):
     class Meta:
         model = IpReservada
         fields = ['ipv4','ipv6','mac','descripcion','dispositivo']
+
+class DeviceForm(forms.ModelForm):
+    class Meta:
+        model = Device
+        fields = ['dvt','ipv4','ipv6','ssh','telnet','conf','conf_t','name','ubicacion','modelo','serial','marca','responsable']

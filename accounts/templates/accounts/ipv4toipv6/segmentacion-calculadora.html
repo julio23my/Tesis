@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block head_title %} Segmentacion en IPv6{% endblock %}
+{% block title_page %} Segmentacion en IPv6{% endblock %}
+
+
+{% block content %}
+    <div>
+        <p>La segmentacion en IPv6 se establece solo para obtener un orden acorde a las localidades, por lo cual si se tiene 5 segmentos de red en ipv4 se tranformaran en ipv6 siguiendo una nomenclatura acorde al segmento ip que se tiene.</p><br>
+        <p>Un ejemplo seria un segmento de red 2001:db8::/32 si se quiere tener 4 localidades simplemente se configuraran los segmentos 2001:db8:1::, 2001:db8:2::,2001:db8:3::, 2001:db8:4:: teniendo asi una segmentacion suficiente mente capaz.</p>
+        <hr>
+    </div>
+<div class="row">
+<div class="col-lg-6 mb-4">
+
+<form method='POST' action='.' enctype='multipart/form-data'> {% csrf_token %}
+    <div class="form-group">{% render_field form.rango class="form-control" placeholder="Rango IP 192.168.0.1/24" type="text" %}</div>
+    <div class="form-group">{% render_field form.mascara class="form-control" placeholder="Mascara IP 255.255.255.0" %}</div>
+    <div class="form-group">{% render_field form.direccion class="form-control" placeholder="Cantidad de Direcciones" %}</div>
+    <div class="form-group">{% render_field form.subredes class="form-control" placeholder="Sub Redes deseadas" %}</div>
+    <div class="form-group">{% render_field form.reserv class="form-control" placeholder="Cantidad de IP Reservadas" %}</div>
+    <div class="form-group"><input class="btn btn-warning btn-block" type="submit" value="Segmentacion"></input></div>
+</form>
+</div>
+</div>
+
+
+
+
+<div class="card shadow">
+    <div class="card-header py-3">
+        <p class="text-warning m-0 font-weight-bold">Detalles Subred</p>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+            <table class="table my-0" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Address</th>
+                        <th>Broadcast Address</th>
+                        <th>Cantidad de direcciones por red</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for objeto in objetos.listadirecciones %}
+                    <tr>
+                        <td>1 </td>
+                        <td>{{ objeto.ip }}</td>
+                        <td>{{ objeto.broadcast }}</td>
+                        <td>{{ objeto.size }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %} Pasos{% endblock %}
+{% block title_page %} Migracion a IPv6 Pasos Esenciales{% endblock %}
+{% block content %}
+    <div>
+        <h5><a></a>¿Qué es IPv6?</h5>
+        <p>IPv6 es la nueva versión del Internet Protocol (IP) en el cual se sustenta la operación de Internet. Las especificaciones técnicas básicas de IPv6 se desarrollaron en la década de los 90s en el IETF (Internet Engineering Task Force). Al día de hoy el protocolo sigue añadiendo nuevas funcionalidades y se le considera un protocolo lo suficientemente maduro para soportar la operación de Internet en substitución de IPv4.</p>
+        <p>La principal motivación para el diseño y despliegue de IPv6 fue la expansión del espacio de direcciones disponible en Internet. De esta forma se permite que se conecten billones de nuevos dispositivos (tabletas, teléfonos móviles, y televisiones inteligentes entre otros), nuevos usuarios y tecnologías “siempre-conectadas” (xDSL, cable, Ethernet en el hogar, Fibra en el hogar, redes inalámbricas, etc.).</p>
+        <p>La versión del protocolo IP que se dejará de utilizar se le conoce como IPv4, la cual dispone sólo de 32 bits de direcciones proporcionando un espacio teórico de 2^32 (aproximadamente cuatro mil millones) interfaces de red únicas globalmente. IPv6 en cambio, tiene un espacio de direcciones de 128 bits y por tanto puede direccionar 2^128 interfaces de red (340.282.366.920.938.463.463.374.607.431.768.211.456).</p>
+        <p>IPv6 representa quizás el cambio más importante en la historia del Internet ya que es necesario para que la red de redes pueda seguir desarrollándose de una forma segura y estable.</p>
+        <hr>
+    </div>
+    <div class="card shadow mb-5">
+    <div class="card-header py-3">
+        <p class="text-warning m-0 font-weight-bold">Pasos</p>
+    </div>
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h5><a></a>Paso 1: Metodos de IPv6</h5> <br>
+                <p>En la actualidad existen miles de millones de dispositivos que utilizan IPv4. Así que pensar en una migración simultánea de IPv4 a IPv6 de todos estos dispositivos es inviable. En algunos casos, aunque se quiera migrar a IPv6, los dispositivos o el software pueden no admitir IPv6 o no tener soporte adecuado para IPv6. Por lo que la migración de IPv4 a IPv6 requerirá años incluso décadas. Afortunadamente, se han desarrollado diferentes mecanismos de transición que permiten una integración fluida de IPv4 e IPv6 y no requieren que la actualización de todos los nodos sea simultánea. Entre ellos cabe destacar:</p>
+                <ul>
+                    <li>
+                        <span>Pilas duales IPv4/IPv6&nbsp;</span>
+                    </li>
+                    <li>
+                        <span>Túneles&nbsp;</span>
+                    </li>
+                    <li>
+                        <span>Conversión entre IPv4 e IPv6 por medio de NAT-PT&nbsp;</span>
+                    </li>
+                </ul>
+            </div>
+            <div class ='col-auto'>
+                <img src="{% static 'assets2/img/ipv4medidoripv6.png' %}">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

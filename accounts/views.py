@@ -68,27 +68,58 @@ def HomeSystem(request):
     return render(request, 'accounts/homesystem.html', context)
 
 
-@login_required(login_url='login')
 def SendConfiguration(request):
     context = {}
     return render(request, 'accounts/sendconf.html', context)
+def Ipv4Ipv6intro(request):
+    context = {
 
+    }
+    return render(request, 'accounts/ipv4toipv6/intro.html', context)
+def Ipv4Ipv6pasos(request):
+    context = {
 
-@login_required(login_url='login')
-def IPv4toIPv6In(request):
+    }
+    return render(request, 'accounts/ipv4toipv6/pasos.html', context)
+
+def SegmentacionCalculadoraipv6(request):
     form = SegmentacionForm(request.POST)
+    objeto = None
+    contar = 0
     if form.is_valid():
         obj = form.save()
         obj.user = request.user
         obj.save()
-        form = SegmentacionForm()
-        print(obj.rango)
-    context = {
-        "form": form
-    }
-    return render(request, 'accounts/ipv4toipv6.html', context)
+        objeto = Segmento.objects.last()
 
-@login_required(login_url='login')
+        #form = SegmentacionForm()
+    context = {
+        "form": form,
+        "objetos":objeto,
+        "contador":contar
+    }
+    return render(request, 'accounts/ipv4toipv6/segmentacion-calculadora.html', context)
+
+def SegmentacionCalculadora(request):
+    form = SegmentacionForm(request.POST)
+    objeto = None
+    contar = 0
+    if form.is_valid():
+        obj = form.save()
+        obj.user = request.user
+        obj.save()
+        objeto = Segmento.objects.last()
+
+        #form = SegmentacionForm()
+    context = {
+        "form": form,
+        "objetos":objeto,
+        "contador":contar
+    }
+    return render(request, 'accounts/segmentacion-calculadora.html', context)
+
+
+
 def Solicitudcrear(request):
     form = SolicitudForm(request.POST)
     if form.is_valid():
@@ -102,10 +133,40 @@ def Solicitudcrear(request):
     return render(request, 'accounts/solicitud.html', context)
 
 
-@login_required(login_url='login')
+
 def Solicitudver(request, pk):
     obj = get_object_or_404(Solicitudes, pk=pk)
     context = {
         "objeto": obj
     }
     return render(request, 'accounts/solicitud-vista.html', context)
+
+
+def InventarioListaDevice(request):
+    objeto = Device.objects.all()
+    context = {
+        "objetos":objeto,
+    }
+    return render(request, 'accounts/inventario-lista.html', context)
+
+def InventarioCrear(request):
+    form = DeviceForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        obj = form.save()
+        obj.user = request.user
+        obj.save()
+        form = DeviceForm()
+    template_name = 'accounts/device-crear.html'
+    context = {'form': form}
+    return render(request, template_name, context)
+
+def InventarioUpdates(request, pk):
+    obj = get_object_or_404(Device, pk=pk)
+    form = DeviceForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+    template_name = 'accounts/device-edit.html'
+    context = {
+        "form": form
+    }
+    return render(request, template_name, context)

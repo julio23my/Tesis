@@ -23,8 +23,15 @@ urlpatterns = [
     path('login/', views.LoginPage, name='login'),
     path('logout/', views.LogoutUser, name='logout'),
     path('registration/', views.registration, name='registration'),
-    path('system', views.HomeSystem, name='system'),
-    path('ipv4-to-ipv6/',views.IPv4toIPv6In, name='ipv4-to-ipv6'),
-    path('solicitud-usuario/', views.Solicitudcrear, name='Solicitud-Usuario-crear'),
-    path('solicitud-usuario/<int:pk>', views.Solicitudver, name='Solicitud-Usuario-ver')
+    path('dashboard', views.HomeSystem, name='dashboard'),
+    path('guia-4to6/', views.Ipv4Ipv6intro, name='guia'),
+    path('guia-4to6/pasos/', views.Ipv4Ipv6pasos, name='pasos'),
+    path('guia-4to6/segmentacion/', views.SegmentacionCalculadoraipv6, name='segmento6'),
+    path('calculadora-segmento/',views.SegmentacionCalculadora, name='segmento'),
+    path('solicitud-usuario/', views.Solicitudcrear, name='crear solicitud'),
+    path('solicitud-usuario/<int:pk>', views.Solicitudver, name='solicitudes de usuarios'),
+    path('inventario/', views.InventarioListaDevice, name='inventario'),
+    path('dispositivo/crear', views.InventarioCrear, name='crear dispositivo'),
+    path('dispositivo/<int:pk>/edit', views.InventarioUpdates),
+
 ]

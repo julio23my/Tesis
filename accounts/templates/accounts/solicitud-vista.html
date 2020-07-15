@@ -1,17 +1,28 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block head_title %} Solicitud {% endblock %}
-{% block title_page %} Solicitud de usuario{% endblock %}
+{% block title_page %} {% endblock %}
 
 
 {% block content %}
-<h3>{{ objeto.pk }}</h3>
-<span>{{ objeto.usuario }}</span>
-   <h4> {{ objeto.solicitud }}</h4>
-{{ objeto.descripcion}}
+<div class="col-lg-8 mb-6">
+<div class="card shadow mb-6">
+    <div class="card-header py-3">
+        <p class="m-0 font-weight-bold">Codigo solicitud: {{ objeto.pk }}, {{ objeto.solicitud_verbose }}</p>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <span><strong> Tipo de solicitud: </strong>  {{ objeto.solicitud_verbose }}</span><br>
+                <span><strong> Solicitante: </strong>  {{ objeto.usuario }}</span><br>
+                <span><strong> Ubicacion: </strong>  {{ objeto.ubicacion }}</span><br>
+                <span><strong> Descripcion: </strong>  {{ objeto.descripcion }}</span><br>
+                <span><strong> Fecha de solicitud: </strong>  {{ objeto.creacion }}</span><br><br><br>
 
-
-
-
-
+               <div class="form-group"><input class="btn btn-warning " type="submit" value="Finalizar Solicitud"></input></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 {% endblock %}

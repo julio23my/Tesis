@@ -12,7 +12,7 @@
                         <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Routers</span></div>
                         <div class="text-dark font-weight-bold h5 mb-0"><span>{{ router }}</span></div>
                     </div>
-                    <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+                    <div class="col-auto"><i class="fas fa-project-diagram fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                         <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Switchs</span></div>
                         <div class="text-dark font-weight-bold h5 mb-0"><span>{{ switch }}</span></div>
                     </div>
-                    <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                    <div class="col-auto"><i class="fas fa-network-wired fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
@@ -40,14 +40,10 @@
                             <div class="col-auto">
                                 <div class="text-dark font-weight-bold h5 mb-0 mr-3"><span>{{ endev }}</span></div>
                             </div>
-{#                            <div class="col">#}
-{#                                <div class="progress progress-sm">#}
-{#                                    <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="sr-only">50%</span></div>#}
-{#                                </div>#}
-{#                            </div>#}
+
                         </div>
                     </div>
-                    <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                    <div class="col-auto"><i class="fas fa-laptop fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
@@ -60,7 +56,7 @@
                         <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Wifi</span></div>
                         <div class="text-dark font-weight-bold h5 mb-0"><span>{{ wifi }}</span></div>
                     </div>
-                    <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
+                    <div class="col-auto"><i class="fas fa-wifi fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
@@ -97,16 +93,20 @@
 {#        </div>#}
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="text-primary font-weight-bold m-0">Solicitudes de red</h6>
+                <h6 class="text-warning font-weight-bold m-0">Solicitudes de red</h6>
             </div>
             <ul class="list-group list-group-flush">
                 {% for solicitud in solicitudes %}
                 <li class="list-group-item">
                     <div class="row align-items-center no-gutters">
                         <div class="col mr-2">
-                            <h6 class="mb-0"><strong>Solicitud: {{ solicitud.pk }}, {{ solicitud.solicitud_verbose }}</strong></h6><span class="text-xs">{{ solicitud.usuario }}, {{ solicitud.ubicacion }} , {{ solicitud.creacion }}</span></div>
+                            <h6 class="mb-0"><strong>Solicitud: {{ solicitud.pk }}, {{ solicitud.solicitud_verbose }}</strong></h6>
+                            <span class="text-xs">{{ solicitud.usuario }}, {{ solicitud.ubicacion }} , {{ solicitud.creacion }}   <a class='text-warning'href='/solicitud-usuario/{{ solicitud.pk }}'> ver</a></span>
+
+                        </div>
+
                         <div class="col-auto">
-                            <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-1" /><label class="custom-control-label" for="formCheck-1"></label></div>
+{#                            <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-1" /><label class="custom-control-label" for="formCheck-1"></label></div>#}
                         </div>
                     </div>
                 </li>
@@ -117,6 +117,10 @@
     </div>
     <div class="col">
         <div class="row">
+            <div class="col-lg-6 mb-4">
+
+
+            </div>
 
 
         </div>

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block head_title %} Dispositivo{% endblock %}
+{% block title_page %} Crear Dispositivo{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+<div class="col-lg-6 mb-4">
+
+<form method='POST' action='.' enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    <div class="form-group">{% render_field form.dvt class="form-control" %}</div>
+    <div class="form-group">{% render_field form.ipv4 class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.ipv6 class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.ssh class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.telnet class="form-control" %}</div>
+    <div class="form-group">{% render_field form.conf class="" %}</div>
+    <div class="form-group">{% render_field form.conf_t class="form-control" %}</div>
+    <div class="form-group">{% render_field form.name class="form-control" %}</div>
+    <div class="form-group">{% render_field form.ubicacion class="form-control" %}</div>
+    <div class="form-group">{% render_field form.modelo class="form-control" %}</div>
+    <div class="form-group">{% render_field form.serial class="form-control" %}</div>
+    <div class="form-group">{% render_field form.marca class="form-control" %}</div>
+    <div class="form-group">{% render_field form.responsable class="form-control" %}</div>
+
+
+    <div class="form-group">
+        <input class="btn btn-warning btn-block" type="submit" value="Añadir dispositivo"></input>
+    </div>
+</form>
+</div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

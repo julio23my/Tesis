@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block head_title %} Vista Inventario {% endblock %}
+{% block title_page %} Equipos Dentro de la red {% endblock %}
+
+
+{% block content %}
+    <div class="card shadow">
+    <div class="card-header py-3">
+        <h5 class="text-warning m-0 font-weight-bold">Iventario de equipos</h5>
+                <a href="{% url 'crear dispositivo' %}" class="btn btn-warning btn-lg active btn-sm" role="button" aria-pressed="true">Crear Dispositivo</a>
+
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+            <table class="table my-0" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Dispositivo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Ubicacion</th>
+                        <th>Puertos</th>
+                        <th>Ipv4 de acceso</th>
+                        <th>Ipv6 de acceso</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for objeto in objetos %}
+                    <tr>
+                        <td>{{ objeto.id }} </td>
+                        <td>{{ objeto.get_dvt_display }}</td>
+                        <td>{{ objeto.marca }}</td>
+                        <td>{{ objeto.modelo }}</td>
+                        <td>{{ objeto.ubicacion }}</td>
+                        <td>{{ objeto.puerto_set.count }}</td>
+                        <td>{{ objeto.ipv4 }}</td>
+                        <td>{{ objeto.ipv6 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
