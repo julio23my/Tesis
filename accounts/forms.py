@@ -10,6 +10,13 @@ class CreateUserForm(UserCreationForm):
         fields = ['username','email','password1','password2']
 
 class SegmentacionForm(forms.ModelForm):
+    subredes = forms.IntegerField(required=False)
+    direccion = forms.IntegerField(required=False)
+    class Meta:
+        model = Segmento
+        fields = ['rango', 'mascara', 'direccion', 'subredes','reserv']
+
+class SegmentacionForm2(forms.ModelForm):
     class Meta:
         model = Segmento
         fields = ['rango', 'mascara', 'direccion', 'subredes', 'reserv']
@@ -29,3 +36,8 @@ class DeviceForm(forms.ModelForm):
     class Meta:
         model = Device
         fields = ['dvt','ipv4','ipv6','ssh','telnet','conf','conf_t','name','ubicacion','modelo','serial','marca','responsable']
+
+class IpReservadaForm(forms.ModelForm):
+    class Meta:
+        model = IpReservada
+        fields = ['ipv4', 'ipv6', 'mac', 'descripcion','dispositivo']

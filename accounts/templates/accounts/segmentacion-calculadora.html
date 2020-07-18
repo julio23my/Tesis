@@ -12,10 +12,11 @@
 <form method='POST' action='.' enctype='multipart/form-data'> {% csrf_token %}
     <div class="form-group">{% render_field form.rango class="form-control" placeholder="Rango IP 192.168.0.1/24" type="text" %}</div>
     <div class="form-group">{% render_field form.mascara class="form-control" placeholder="Mascara IP 255.255.255.0" %}</div>
-    <div class="form-group">{% render_field form.direccion class="form-control" placeholder="Cantidad de Direcciones" %}</div>
-    <div class="form-group">{% render_field form.subredes class="form-control" placeholder="Sub Redes deseadas" %}</div>
-    <div class="form-group">{% render_field form.reserv class="form-control" placeholder="Cantidad de IP Reservadas" %}</div>
+    <div class="form-group">{% render_field form.direccion class="form-control" placeholder="Cantidad de Direcciones" readonly='readonly' value=""  %}</div>
+    <div class="form-group">{% render_field form.subredes class="form-control" placeholder="Sub Redes deseadas" readonly='readonly' value="" %}</div>
+    <div class="form-group">{% render_field form.reserv class="form-control" placeholder="Cantidad de IP Reservadas" readonly='readonly' value="" %}</div>
     <div class="form-group"><input class="btn btn-warning btn-block" type="submit" value="Segmentacion"></input></div>
+{{ form.errors }}
 </form>
 </div>
 </div>
@@ -27,7 +28,7 @@
     <div class="card-header py-3">
         <p class="text-warning m-0 font-weight-bold">Detalles Subred</p>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="text-align: center;">
         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
             <table class="table my-0" id="dataTable">
                 <thead>
@@ -42,7 +43,7 @@
 
                 {% for objeto in objetos.listadirecciones %}
                     <tr>
-                        <td>1 </td>
+                        <td>{{forloop.counter}} </td>
                         <td>{{ objeto.ip }}</td>
                         <td>{{ objeto.broadcast }}</td>
                         <td>{{ objeto.size }}</td>
@@ -56,5 +57,8 @@
     </div>
 </div>
 
+    <br>
+    <br>
+    <br>
 
 {% endblock %}

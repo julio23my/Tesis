@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block head_title %} Dispositivo{% endblock %}
+{% block title_page %} Crear Dispositivo{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+<div class="col-lg-6 mb-4">
+
+<form method='POST' action='{% url 'crear ip' %}' enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    <div class="form-group">{% render_field form.ipv4 class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.ipv6 class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.mac class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.descripcion class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.dispositivo class="form-control"  %}</div>
+
+
+
+    <div class="form-group">
+        <input class="btn btn-warning btn-block" type="submit" value="Añadir dispositivo"></input>
+    </div>
+</form>
+</div>
+</div>
+ {{ form.errors }}
+
+
+
+
+
+
+{% endblock %}

@@ -30,8 +30,11 @@ urlpatterns = [
     path('calculadora-segmento/',views.SegmentacionCalculadora, name='segmento'),
     path('solicitud-usuario/', views.Solicitudcrear, name='crear solicitud'),
     path('solicitud-usuario/<int:pk>', views.Solicitudver, name='solicitudes de usuarios'),
-    path('inventario/', views.InventarioListaDevice, name='inventario'),
+    path('dispositivo/', views.InventarioListaDevice, name='inventario'),
     path('dispositivo/crear', views.InventarioCrear, name='crear dispositivo'),
-    path('dispositivo/<int:pk>/edit', views.InventarioUpdates),
+    path('dispositivo/<int:pk>/', views.InventarioUpdates, name='editar dispositivo'),
+    path('ip/', views.IPListaReverse, name='ip'),
+    path('ip/crear', views.IPCrear, name='crear ip'),
+    path('ip/<int:pk>/', views.IPUpdates, name='editar ip'),
 
 ]

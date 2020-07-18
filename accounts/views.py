@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from .forms import *
 from .decorators import unauthenticated_user
 from django.contrib import messages
@@ -83,7 +83,7 @@ def Ipv4Ipv6pasos(request):
     return render(request, 'accounts/ipv4toipv6/pasos.html', context)
 
 def SegmentacionCalculadoraipv6(request):
-    form = SegmentacionForm(request.POST)
+    form = SegmentacionForm2(request.POST)
     objeto = None
     contar = 0
     if form.is_valid():
@@ -103,18 +103,14 @@ def SegmentacionCalculadoraipv6(request):
 def SegmentacionCalculadora(request):
     form = SegmentacionForm(request.POST)
     objeto = None
-    contar = 0
     if form.is_valid():
         obj = form.save()
         obj.user = request.user
         obj.save()
         objeto = Segmento.objects.last()
-
-        #form = SegmentacionForm()
     context = {
         "form": form,
         "objetos":objeto,
-        "contador":contar
     }
     return render(request, 'accounts/segmentacion-calculadora.html', context)
 
@@ -165,7 +161,38 @@ def InventarioUpdates(request, pk):
     form = DeviceForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
+        return redirect('/dispositivo/')
     template_name = 'accounts/device-edit.html'
+    context = {
+        "form": form
+    }
+    return render(request, template_name, context)
+
+def IPListaReverse(request):
+    objeto = IpReservada.objects.all()
+    context = {
+        "objetos":objeto,
+    }
+    return render(request, 'accounts/ipreservada/lista.html', context)
+
+def IPCrear(request):
+    form = IpReservadaForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save()
+        obj.user = request.user
+        obj.save()
+        form = IpReservadaForm()
+    template_name = 'accounts/ipreservada/crear.html'
+    context = {'form': form}
+    return render(request, template_name, context)
+
+def IPUpdates(request, pk):
+    obj = get_object_or_404(IpReservada, pk=pk)
+    form = DeviceForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect('/ip/')
+    template_name = 'accounts/ipreservada/editar.html'
     context = {
         "form": form
     }

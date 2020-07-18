@@ -97,27 +97,26 @@ class Segmento(models.Model):
 
     ]
     #Rango de direcciones ip 190.170.128.0/18
-    rango = models.CharField(max_length=50,blank=True, null=True)
+    rango = models.CharField(max_length=50)
     # Mascara de subred
-    mascara = models.CharField(max_length=50, choices=MASK,blank=True, null=True)
+    mascara = models.CharField(max_length=50, choices=MASK)
     # Cantidad de direcciones IP
     direccion = models.IntegerField(verbose_name='Numero de usuarios', blank=True, null=True)
     # Segmentaciones de rangos IP 190.170.129.129/25 cantidades
-    subredes = models.IntegerField(verbose_name='Numero de subredes', default=0)
+    subredes = models.IntegerField(verbose_name='Numero de subredes', default=0, blank=True, null=True)
     # Reservadas IP
     reserv = models.IntegerField(blank=True, null=True)
 
-    # def save(self, *args, **kwargs):
-    #     ip = IPNetwork(self.rango)
-    #     subnets = list(ip.subnet(int(self.mascara)))
-    #     self.subredes = len(subnets)
-    #     self.direccion = subnets[0].size
-    #     super(Segmento, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        ip = IPNetwork(self.rango)
+        subnets = list(ip.subnet(int(self.mascara)))
+        self
+        super(Segmento, self).save(*args, **kwargs)
 
     def listadirecciones(self):
         ip = IPNetwork(self.rango)
         subnets = list(ip.subnet(int(self.mascara)))
-        return subnets
+        return list(subnets)
 
 # Direcciones IP reservadas
 class IpReservada(models.Model):
