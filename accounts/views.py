@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 # import netmiko
 # import napalm
-
+import sys
+from time import sleep
+import paramiko
 
 # Create your views here.
 def home_view(request):
@@ -69,7 +71,26 @@ def HomeSystem(request):
 
 
 def SendConfiguration(request):
-    context = {}
+    form = SendConfForm(request.POST)
+    if form.is_valid():
+        obj = form.save()
+        obj.user = request.user
+        obj.save()
+        for device in form.cleaned_data['devices']:
+            print(device.dvt)
+            conn = paramiko.SSHClient()
+            conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            conn.connect(device.ipv4, username=device.username, password=device.clave)
+            router_conn = conn.invoke_shell()
+            print('Successfully connected to')
+            lineas = device.conf_t.splitlines()
+            for linea in lineas:
+                router_conn.send(linea)
+                sleep(1)
+                print(router_conn.recv(5000).decode("utf-8"))
+
+
+    context = {"form": form}
     return render(request, 'accounts/sendconf.html', context)
 def Ipv4Ipv6intro(request):
     context = {
@@ -195,5 +216,13 @@ def IPUpdates(request, pk):
     template_name = 'accounts/ipreservada/editar.html'
     context = {
         "form": form
+    }
+    return render(request, template_name, context)
+
+
+def Topology(request):
+
+    template_name = 'accounts/topology/show.html'
+    context = {
     }
     return render(request, template_name, context)

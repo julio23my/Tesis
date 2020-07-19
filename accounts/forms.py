@@ -41,3 +41,10 @@ class IpReservadaForm(forms.ModelForm):
     class Meta:
         model = IpReservada
         fields = ['ipv4', 'ipv6', 'mac', 'descripcion','dispositivo']
+
+
+class SendConfForm(forms.ModelForm):
+    devices = forms.ModelMultipleChoiceField(queryset= Device.objects.filter(dvt='R') | Device.objects.filter(dvt='S'), widget=forms.CheckboxSelectMultiple(), required=False)
+    class Meta:
+        model = SendConf
+        fields = ['devices','conf']

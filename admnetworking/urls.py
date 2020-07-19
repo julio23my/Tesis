@@ -36,5 +36,6 @@ urlpatterns = [
     path('ip/', views.IPListaReverse, name='ip'),
     path('ip/crear', views.IPCrear, name='crear ip'),
     path('ip/<int:pk>/', views.IPUpdates, name='editar ip'),
+    path('sendconf/', views.SendConfiguration, name='sendconf')
 
 ]

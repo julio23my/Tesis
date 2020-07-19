@@ -33,12 +33,18 @@ class Device(models.Model):
     telnet = models.BooleanField(blank=True, null=True)
     conf = models.FileField(upload_to='media/',blank=True, null=True)
     conf_t = models.TextField(blank=True, null=True)
+    username = models.CharField(max_length=50, verbose_name='Usuario de Acceso', blank=True, null=True)
+    clave = models.CharField(max_length=50, verbose_name='Password conexion', blank=True, null=True)
     name = models.CharField(max_length=50, verbose_name='Hostname',blank=True, null=True)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Ubicacion del Equipo')
     modelo = models.CharField(max_length=50, blank=True, null=True)
     serial = models.CharField(max_length=50, blank=True, null=True)
     marca = models.CharField(max_length=50, blank=True, null=True)
     responsable = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return '%s, %s'%(self.get_dvt_display(), self.ipv4)
+
 
 # Inventario,SendConf View
 class Puerto(models.Model):
@@ -143,5 +149,9 @@ class Solicitudes(models.Model):
         return dict(Solicitudes.SOL)[self.solicitud]
 
 
+
+class SendConf(models.Model):
+    devices = models.ManyToManyField(Device)
+    conf = models.TextField()
 
 
