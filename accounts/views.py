@@ -52,7 +52,7 @@ def registration(request):
     return render(request, 'accounts/registration.html',context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def HomeSystem(request):
     countsr = Device.objects.filter(dvt='R').count()
     countsw = Device.objects.filter(dvt='SW').count()
@@ -220,9 +220,33 @@ def IPUpdates(request, pk):
     return render(request, template_name, context)
 
 
-def Topology(request):
-
-    template_name = 'accounts/topology/show.html'
+def UbicacionLista(request):
+    objeto = Ubicacion.objects.all()
     context = {
+        "objetos":objeto,
+    }
+    return render(request, 'accounts/ubicacion/lista.html', context)
+
+def UbicacionCrear(request):
+    form = UbicacionForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save()
+        obj.user = request.user
+        obj.save()
+        form = UbicacionForm()
+        redirect('Ubicacion Lista')
+    template_name = 'accounts/ubicacion/crear.html'
+    context = {'form': form}
+    return render(request, template_name, context)
+
+def UbicacionUpdate(request, pk):
+    obj = get_object_or_404(Ubicacion, pk=pk)
+    form = UbicacionForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect('/Ubicacion/')
+    template_name = 'accounts/ubicacion/editar.html'
+    context = {
+        "form": form
     }
     return render(request, template_name, context)

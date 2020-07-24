@@ -48,3 +48,9 @@ class SendConfForm(forms.ModelForm):
     class Meta:
         model = SendConf
         fields = ['devices','conf']
+
+
+class UbicacionForm(forms.ModelForm):
+    class Meta:
+        model = Ubicacion
+        fields = ['localidad','departamento']

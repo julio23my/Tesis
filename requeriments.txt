@@ -5,4 +5,4 @@ gunicorn
 numpy
 pandas
 netaddr
-
+django-widget-tweaks
