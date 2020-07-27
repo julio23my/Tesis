@@ -181,7 +181,7 @@ def InventarioUpdates(request, pk):
     obj = get_object_or_404(Device, pk=pk)
     form = DeviceForm(request.POST or None, instance=obj)
     formset = PuertoFormSet(request.POST or None, instance=obj)
-    if form.is_valid():
+    if form.is_valid() and formset.is_valid():
         formset.save()
         form.save()
         return redirect('/dispositivo/')
