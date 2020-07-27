@@ -180,12 +180,15 @@ def InventarioCrear(request):
 def InventarioUpdates(request, pk):
     obj = get_object_or_404(Device, pk=pk)
     form = DeviceForm(request.POST or None, instance=obj)
+    formset = PuertoFormSet(request.POST or None, instance=obj)
     if form.is_valid():
+        formset.save()
         form.save()
         return redirect('/dispositivo/')
     template_name = 'accounts/device-edit.html'
     context = {
-        "form": form
+        "form": form,
+        "formset":formset
     }
     return render(request, template_name, context)
 
@@ -209,7 +212,7 @@ def IPCrear(request):
 
 def IPUpdates(request, pk):
     obj = get_object_or_404(IpReservada, pk=pk)
-    form = DeviceForm(request.POST or None, instance=obj)
+    form = IpReservadaForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
         return redirect('/ip/')

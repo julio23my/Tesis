@@ -3,6 +3,7 @@ from django.contrib.auth.forms import  UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import *
+from django.forms import inlineformset_factory
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -36,6 +37,12 @@ class DeviceForm(forms.ModelForm):
     class Meta:
         model = Device
         fields = ['dvt','ipv4','ipv6','ssh','telnet','conf','conf_t','name','ubicacion','modelo','serial','marca','responsable']
+class PuertoForm(forms.ModelForm):
+    class Meta:
+        model = Puerto
+        exclude = ()
+
+PuertoFormSet = inlineformset_factory(Device, Puerto, form=PuertoForm, extra=1)
 
 class IpReservadaForm(forms.ModelForm):
     class Meta:
@@ -48,6 +55,11 @@ class SendConfForm(forms.ModelForm):
     class Meta:
         model = SendConf
         fields = ['devices','conf']
+
+class UbicacionForm(forms.ModelForm):
+    class Meta:
+        model = Ubicacion
+        fields = ['localidad','departamento']
 
 
 class UbicacionForm(forms.ModelForm):

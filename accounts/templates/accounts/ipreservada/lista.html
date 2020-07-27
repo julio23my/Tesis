@@ -8,7 +8,7 @@
     <div class="card shadow">
     <div class="card-header py-3">
         <h5 class="text-warning m-0 font-weight-bold">Direcciones IP Reservada</h5>
-                <a href="{% url 'crear ip' %}" class="btn btn-warning btn-lg active btn-sm" role="button" aria-pressed="true">Reservar Direccion</a>
+                <a href="{% url 'crear ip' %}" class="btn btn-warning btn-lg active btn-sm" role="button" aria-pressed="true">Crear Dispositivo</a>
 
     </div>
 
@@ -18,10 +18,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>IPv4</th>
-                        <th>IPv6</th>
-                        <th>Mac</th>
                         <th>Dispositivo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Ubicacion</th>
+                        <th>Puertos</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                         <td>{{ objeto.ipv4 }}</td>
                         <td>{{ objeto.ipv6 }}</td>
                         <td>{{ objeto.mac }}</td>
+                        <td>{{ objeto.descripcion }}</td>
                         <td>{{ objeto.dispositivo }}</td>
                     </tr>
                 {% endfor %}

@@ -9,11 +9,11 @@
 <div class="row">
 <div class="col-lg-6 mb-4">
 
-<form method='POST' action='.' enctype='multipart/form-data'>
+<form method='POST' action='{% url 'crear ip' %}' enctype='multipart/form-data'>
     {% csrf_token %}
 
-    <div class="form-group">{% render_field form.localidad class="form-control" placeholder='Localidad' %}</div>
-    <div class="form-group">{% render_field form.departamento class="form-control" placeholder='Departamento'  %}</div>
+    <div class="form-group">{% render_field form.localidad class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.departamento class="form-control"  %}</div>
     <div class="form-group">
         <input class="btn btn-warning btn-block" type="submit" value="Añadir Departamento"></input>
     </div>

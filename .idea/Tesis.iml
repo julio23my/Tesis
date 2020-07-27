@@ -16,7 +16,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/env" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (Tesis)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (Tesis)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Django Lib" level="project" />
   </component>
@@ -25,6 +25,9 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/env/Lib/site-packages/django/forms/templates" />
+        <option value="$MODULE_DIR$/templates" />
+        <option value="$MODULE_DIR$/accounts/templates" />
+        <option value="$MODULE_DIR$/static" />
       </list>
     </option>
   </component>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
-{% block head_title %} Reservar Direccion{% endblock %}
-{% block title_page %} Reservar Direccion{% endblock %}
+{% block head_title %} Dispositivo{% endblock %}
+{% block title_page %} Crear Dispositivo{% endblock %}
 
 
 {% block content %}
@@ -12,10 +12,10 @@
 <form method='POST' action='{% url 'crear ip' %}' enctype='multipart/form-data'>
     {% csrf_token %}
 
-    <div class="form-group">{% render_field form.ipv4 class="form-control" placeholder='Direccion IPv4 192.168.0.1'  %}</div>
-    <div class="form-group">{% render_field form.ipv6 class="form-control" placeholder='Direccion IPv6 2006:db8::0001'  %}</div>
-    <div class="form-group">{% render_field form.mac class="form-control" placeholder='Direccion MAC ff:ff:ff:ff:ff'  %}</div>
-    <div class="form-group">{% render_field form.descripcion class="form-control" placeholder='Descripcion de la reserva' %}</div>
+    <div class="form-group">{% render_field form.ipv4 class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.ipv6 class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.mac class="form-control"  %}</div>
+    <div class="form-group">{% render_field form.descripcion class="form-control"  %}</div>
     <div class="form-group">{% render_field form.dispositivo class="form-control"  %}</div>
 
 

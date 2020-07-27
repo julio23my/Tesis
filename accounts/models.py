@@ -8,6 +8,8 @@ class Ubicacion(models.Model):
     localidad = models.CharField(max_length=50)
     departamento = models.CharField(max_length=50, blank=True, null=True)
 
+
+#ParentModel.objects.exclude(childrenmodel_set__isnull=True)
 # Inventario, SendConf View
 class Device(models.Model):
     ROUTER = 'R'
@@ -116,7 +118,6 @@ class Segmento(models.Model):
     def save(self, *args, **kwargs):
         ip = IPNetwork(self.rango)
         subnets = list(ip.subnet(int(self.mascara)))
-        self
         super(Segmento, self).save(*args, **kwargs)
 
     def listadirecciones(self):
