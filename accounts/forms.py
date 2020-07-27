@@ -42,7 +42,7 @@ class PuertoForm(forms.ModelForm):
         model = Puerto
         exclude = ()
 
-PuertoFormSet = inlineformset_factory(Device, Puerto, form=PuertoForm, extra=1, can_delete=True)
+PuertoFormSet = inlineformset_factory(Device, Puerto, form=PuertoForm, extra=1)
 
 class IpReservadaForm(forms.ModelForm):
     class Meta:

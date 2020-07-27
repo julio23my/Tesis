@@ -7,14 +7,14 @@
 
 {% block content %}
 
-<div class="row">
-<div class="col-lg-6 mb-4">
+
 
 <form method='POST' action='.' enctype='multipart/form-data'>
     {% csrf_token %}
-
-    <div class="form-group">{% render_field form.dvt class="form-control" %}</div>
-    <div class="form-group">{% render_field form.ipv4 class="form-control"  %}</div>
+<div class="row">
+<div class="col-lg-5 ">
+    <div class="form-group"> {% render_field form.dvt class="form-control" %} </div>
+    <div class="form-group"> {% render_field form.ipv4 class="form-control"  %}</div>
     <div class="form-group">{% render_field form.ipv6 class="form-control"  %}</div>
     <div class="form-group">{% render_field form.ssh class="form-control"  %}</div>
     <div class="form-group">{% render_field form.telnet class="form-control" %}</div>
@@ -26,7 +26,11 @@
     <div class="form-group">{% render_field form.serial class="form-control" %}</div>
     <div class="form-group">{% render_field form.marca class="form-control" %}</div>
     <div class="form-group">{% render_field form.responsable class="form-control" %}</div>
+</div>
+<div class="col-lg-7 ">
 
+
+</div>
     <table class="table">
             {{ formset.management_form }}
 
@@ -41,34 +45,87 @@
                     </thead>
                 {% endif %}
                 <tr class="{% cycle "row1" "row2" %} formset_row">
-                    {% for field in form.visible_fields %}
+
                         <td>
                             {# Include the hidden fields in the form #}
-                            {% if forloop.first %}
-                                {% for hidden in form.hidden_fields %}
-                                    {{ hidden }}
-                                {% endfor %}
-                            {% endif %}
-                            {{ field.errors.as_ul }}
-                            {{ field }}
+                            {{ form.errors.as_ul }}
+                            {% render_field form.puerto class="form-control" %}
                         </td>
-                    {% endfor %}
+                <td>
+                            {# Include the hidden fields in the form #}
+                            {{ form.errors.as_ul }}
+                            {% render_field form.vlan class="form-control" %}
+                        </td>
+                <td>
+                            {# Include the hidden fields in the form #}
+                            {{ form.errors.as_ul }}
+                            {% render_field form.mac class="form-control" %}
+                        </td>
+                <td>
+                            {# Include the hidden fields in the form #}
+                            {{ form.errors.as_ul }}
+                            {% render_field form.ipv4 class="form-control" %}
+                        </td>
+                <td>
+                            {# Include the hidden fields in the form #}
+                            {{ form.errors.as_ul }}
+                            {% render_field form.ipv6 class="form-control" %}
+                        </td>
+                <td>
+                            {# Include the hidden fields in the form #}
+                            {{ form.errors.as_ul }}
+                            {% render_field form.actv type="checkbox" class="form-control" %}
+                        </td>
+                <td>
+                            {# Include the hidden fields in the form #}
+                            {{ form.errors.as_ul }}
+                            {% render_field form.DELETE class="form-control" %}
+                        </td>
+
+
+
+
                 </tr>
             {% endfor %}
         </table>
-
+</div>
 
     <div class="form-group">
         <input class="btn btn-warning btn-block" type="submit" value="Añadir dispositivo"></input>
     </div>
 </form>
-</div>
-</div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+{#<table class="table">#}
+{#            {{ formset.management_form }}#}
+{##}
+{#            {% for form in formset.forms %}#}
+{#                {% if forloop.first %}#}
+{#                    <thead>#}
+{#                    <tr>#}
+{#                        {% for field in form.visible_fields %}#}
+{#                            <th>{{ field.label|capfirst }}</th>#}
+{#                        {% endfor %}#}
+{#                    </tr>#}
+{#                    </thead>#}
+{#                {% endif %}#}
+{#                <tr class="{% cycle "row1" "row2" %} formset_row">#}
+{#                    {% for field in form.visible_fields %}#}
+{#                        <td>#}
+                            {# Include the hidden fields in the form #}
+{#                            {% if forloop.first %}#}
+{#                                {% for hidden in form.hidden_fields %}#}
+{#                                    {{ hidden }}#}
+{#                                {% endfor %}#}
+{#                            {% endif %}#}
+{#                            {{ field.errors.as_ul }}#}
+{#                            {{ field }}#}
+{#                        </td>#}
+{#                    {% endfor %}#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+
+
 <script src="{% static 'assets2/js/jquery.formset.js' %}"></script>
-
-
-
-
 
 {% endblock %}
