@@ -18,19 +18,19 @@ from django.urls import path
 from accounts import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='house'),
     path('', views.home_view, name='home'),
     path('login/', views.LoginPage, name='login'),
     path('logout/', views.LogoutUser, name='logout'),
     path('registration/', views.registration, name='Registrar'),
-    path('dashboard', views.HomeSystem, name='dashboard'),
+    path('dashboard', views.HomeSystem, name='Dashboard'),
     path('guia-4to6/', views.Ipv4Ipv6intro, name='guia'),
     path('guia-4to6/pasos/', views.Ipv4Ipv6pasos, name='pasos'),
     path('guia-4to6/segmentacion/', views.SegmentacionCalculadoraipv6, name='segmento6'),
     path('calculadora-segmento/',views.SegmentacionCalculadora, name='segmento'),
     path('solicitud-usuario/', views.Solicitudcrear, name='crear solicitud'),
     path('solicitud-usuario/<int:pk>', views.Solicitudver, name='solicitudes de usuarios'),
-    path('dispositivo/', views.InventarioListaDevice, name='inventario'),
+    path('dispositivo/', views.InventarioListaDevice, name='Inventario'),
     path('dispositivo/crear', views.InventarioCrear, name='crear dispositivo'),
     path('dispositivo/<int:pk>/', views.InventarioUpdates, name='editar dispositivo'),
     path('ip/', views.IPListaReverse, name='ip'),
@@ -39,6 +39,7 @@ urlpatterns = [
     path('ubicacion/', views.UbicacionLista, name='Lista Ubicacion'),
     path('ubicacion/crear', views.UbicacionCrear, name='Crear Ubicacion'),
     path('ubicacion/<int:pk>/', views.UbicacionUpdate, name='Editar Ubicacion'),
-    path('sendconf/', views.SendConfiguration, name='sendconf')
+    path('sendconf/', views.SendConfiguration, name='sendconf'),
+    path('solicitud-usuario-f/<int:pk>/', views.Solicitudf, name='Solicitud Cambio'),
 
 ]

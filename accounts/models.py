@@ -29,20 +29,20 @@ class Device(models.Model):
     ]
     #id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     dvt =  models.CharField(max_length=2,choices=Type_Devices, verbose_name='Tipo de Dispositivos')
-    ipv4 = models.GenericIPAddressField(protocol='IPv4', verbose_name='IPv4 De Acceso')
-    ipv6 = models.GenericIPAddressField(protocol='IPv6',verbose_name='IPv6 De Acceso')
-    ssh = models.BooleanField(blank=True, null=True)
-    telnet = models.BooleanField(blank=True, null=True)
-    conf = models.FileField(upload_to='media/',blank=True, null=True)
-    conf_t = models.TextField(blank=True, null=True)
+    ipv4 = models.GenericIPAddressField(protocol='IPv4', verbose_name='IPv4')
+    ipv6 = models.GenericIPAddressField(protocol='IPv6',verbose_name='IPv6')
+    ssh = models.BooleanField(blank=True, null=True, verbose_name='SSH')
+    telnet = models.BooleanField(blank=True, null=True, verbose_name='Telnet')
+    conf = models.FileField(upload_to='media/',blank=True, null=True, verbose_name='Archivo')
+    conf_t = models.TextField(blank=True, null=True, verbose_name='Configuracion')
     username = models.CharField(max_length=50, verbose_name='Usuario de Acceso', blank=True, null=True)
-    clave = models.CharField(max_length=50, verbose_name='Password conexion', blank=True, null=True)
+    clave = models.CharField(max_length=50, verbose_name='Clave de Acceso', blank=True, null=True)
     name = models.CharField(max_length=50, verbose_name='Hostname',blank=True, null=True)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Ubicacion del Equipo')
-    modelo = models.CharField(max_length=50, blank=True, null=True)
-    serial = models.CharField(max_length=50, blank=True, null=True)
-    marca = models.CharField(max_length=50, blank=True, null=True)
-    responsable = models.CharField(max_length=50, blank=True, null=True)
+    modelo = models.CharField(max_length=50, blank=True, null=True, verbose_name='Modelo')
+    serial = models.CharField(max_length=50, blank=True, null=True, verbose_name='Serial')
+    marca = models.CharField(max_length=50, blank=True, null=True, verbose_name='Marca')
+    responsable = models.CharField(max_length=50, blank=True, null=True, verbose_name='Responsable')
 
     def __str__(self):
         return '%s, %s'%(self.get_dvt_display(), self.ipv4)
@@ -50,28 +50,22 @@ class Device(models.Model):
 
 # Inventario,SendConf View
 class Puerto(models.Model):
-    device = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Puerto del Dispositivo')
-    puerto = models.CharField(max_length=50,blank=True, null=True)
-    vlan = models.IntegerField(default=1,blank=True, null=True)
-    mac = models.CharField(max_length=50,blank=True, null=True)
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Dispositivo')
+    puerto = models.CharField(max_length=50,blank=True, null=True, verbose_name='Puerto')
+    vlan = models.IntegerField(default=1,blank=True, null=True, verbose_name='Vlan')
+    mac = models.CharField(max_length=50,blank=True, null=True, verbose_name='Mac')
     ipv4 = models.GenericIPAddressField(protocol='IPv4', verbose_name='IPv4',blank=True, null=True)
     ipv6 = models.GenericIPAddressField(protocol='IPv6',verbose_name='IPv6',blank=True, null=True)
-    actv = models.BooleanField(default=False)
+    actv = models.BooleanField(default=False, verbose_name='Puerto Activo')
 
 
 #Logs
 class Log(models.Model):
-    device = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True, null=True,verbose_name='Logs del Dispositivo')
-    log = models.CharField(max_length=2500, blank=True, null=True)
-    alerta = models.BooleanField()
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True, null=True,verbose_name='Dispositivo')
+    log = models.CharField(max_length=2500, blank=True, null=True, verbose_name='Log')
+    alerta = models.BooleanField(verbose_name='Alerta')
 
-#Usuarios
-class Usuario(models.Model):
-    name = models.CharField(max_length=10)
-    device = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True, null=True,verbose_name='Usuario del Dispositivo')
-    ssh = models.BooleanField(blank=True, null=True)
-    telnet = models.BooleanField(blank=True, null=True)
-    activo = models.BooleanField()
+
 
 
 #IPV4 to IPV6 View
@@ -105,15 +99,15 @@ class Segmento(models.Model):
 
     ]
     #Rango de direcciones ip 190.170.128.0/18
-    rango = models.CharField(max_length=50)
+    rango = models.CharField(max_length=50, verbose_name='Rango IP')
     # Mascara de subred
-    mascara = models.CharField(max_length=50, choices=MASK)
+    mascara = models.CharField(max_length=50, choices=MASK, verbose_name='Mascara')
     # Cantidad de direcciones IP
     direccion = models.IntegerField(verbose_name='Numero de usuarios', blank=True, null=True)
     # Segmentaciones de rangos IP 190.170.129.129/25 cantidades
     subredes = models.IntegerField(verbose_name='Numero de subredes', default=0, blank=True, null=True)
     # Reservadas IP
-    reserv = models.IntegerField(blank=True, null=True)
+    reserv = models.IntegerField(blank=True, null=True, verbose_name='Numero de IP Reservadas')
 
     def save(self, *args, **kwargs):
         ip = IPNetwork(self.rango)
@@ -127,11 +121,11 @@ class Segmento(models.Model):
 
 # Direcciones IP reservadas
 class IpReservada(models.Model):
-    ipv4 = models.GenericIPAddressField(protocol='IPv4', verbose_name='IPv4 De Acceso', blank=True, null=True)
-    ipv6 = models.GenericIPAddressField(protocol='IPv6', verbose_name='IPv6 De Acceso', blank=True, null=True)
-    mac = models.CharField(max_length=50)
-    descripcion = models.TextField()
-    dispositivo = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True, null=True)
+    ipv4 = models.GenericIPAddressField(protocol='IPv4', verbose_name='IPv4', blank=True, null=True)
+    ipv6 = models.GenericIPAddressField(protocol='IPv6', verbose_name='IPv6', blank=True, null=True)
+    mac = models.CharField(max_length=50, verbose_name='MAC')
+    descripcion = models.TextField(verbose_name='Descripcion')
+    dispositivo = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Dispositivo')
 
 class Solicitudes(models.Model):
     SOL = [
@@ -139,11 +133,11 @@ class Solicitudes(models.Model):
         ('1', 'Expansion de red'),
         ('2', 'Solicitud de IP reservada'),
     ]
-    usuario = models.CharField(max_length=50)
-    solicitud = models.CharField(max_length=200, choices=SOL)
-    descripcion = models.TextField()
-    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.SET_NULL, blank=True, null=True)
-    completa = models.BooleanField(default=False)
+    usuario = models.CharField(max_length=50, verbose_name='Usuario')
+    solicitud = models.CharField(max_length=200, choices=SOL, verbose_name='Tipo de Solicitud')
+    descripcion = models.TextField(verbose_name='Descripcion')
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Ubicacion')
+    completa = models.BooleanField(default=False, verbose_name='Finalizada')
     creacion = models.DateTimeField(auto_created=True, auto_now=True)
 
     def solicitud_verbose(self):
@@ -153,6 +147,6 @@ class Solicitudes(models.Model):
 
 class SendConf(models.Model):
     devices = models.ManyToManyField(Device)
-    conf = models.TextField()
+    conf = models.TextField(verbose_name='Configuracion a Enviar')
 
 

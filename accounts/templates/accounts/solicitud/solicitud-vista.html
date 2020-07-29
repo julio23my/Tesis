@@ -19,7 +19,7 @@
                 <span><strong> Descripcion: </strong>  {{ objeto.descripcion }}</span><br>
                 <span><strong> Fecha de solicitud: </strong>  {{ objeto.creacion }}</span><br><br><br>
 
-               <div class="form-group"><input class="btn btn-warning " type="submit" value="Finalizar Solicitud"></input></div>
+               <div class="form-group"> <a href="{% url 'Solicitud Cambio' objeto.pk %}"><input class="btn btn-warning " type="submit" value="Finalizar Solicitud" ></input></a></div>
             </div>
         </div>
     </div>

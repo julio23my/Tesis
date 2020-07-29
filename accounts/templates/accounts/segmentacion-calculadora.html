@@ -1,24 +1,50 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
 {% load widget_tweaks %}
-{% block head_title %} Segmentacion{% endblock %}
-{% block title_page %} Segmentacion{% endblock %}
-
+{% block head_title %} Calculadora{% endblock %}
+{% block title_page %} Calculadora Segmentacion{% endblock %}
 
 {% block content %}
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+
+{# Display a form #}
+<form action="" method="POST" class="form">
+  {% csrf_token %}
+{% bootstrap_form_errors form %}
 
 <div class="row">
-<div class="col-lg-6 mb-4">
+    <div class="col-md-9">
+      {% bootstrap_field form.rango layout='horizontal' %}
 
-<form method='POST' action='.' enctype='multipart/form-data'> {% csrf_token %}
-    <div class="form-group">{% render_field form.rango class="form-control" placeholder="Rango IP 192.168.0.1/24" type="text" %}</div>
-    <div class="form-group">{% render_field form.mascara class="form-control" placeholder="Mascara IP 255.255.255.0" %}</div>
-    <div class="form-group">{% render_field form.direccion class="form-control" placeholder="Cantidad de Direcciones" readonly='readonly' value=""  %}</div>
-    <div class="form-group">{% render_field form.subredes class="form-control" placeholder="Sub Redes deseadas" readonly='readonly' value="" %}</div>
-    <div class="form-group">{% render_field form.reserv class="form-control" placeholder="Cantidad de IP Reservadas" readonly='readonly' value="" %}</div>
-    <div class="form-group"><input class="btn btn-warning btn-block" type="submit" value="Segmentacion"></input></div>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col-md-9">
+      {% bootstrap_field form.mascara layout='horizontal' %}
+
+    </div>
+    <div class="col">
+    </div>
+  </div>
+
+
+{% buttons %}
+    <button type="submit" class="btn btn-warning" style="text-align: center;">
+      <span style="color: #ffffff;">Segmentar</span>
+    </button>
+  {% endbuttons %}
 </form>
-</div>
-</div>
 
 
 

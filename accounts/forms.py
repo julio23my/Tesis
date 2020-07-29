@@ -11,21 +11,21 @@ class CreateUserForm(UserCreationForm):
         fields = ['username','email','password1','password2']
 
 class SegmentacionForm(forms.ModelForm):
-    subredes = forms.IntegerField(required=False)
-    direccion = forms.IntegerField(required=False)
+
     class Meta:
         model = Segmento
-        fields = ['rango', 'mascara', 'direccion', 'subredes','reserv']
+        fields = ['rango', 'mascara']
 
 class SegmentacionForm2(forms.ModelForm):
     class Meta:
         model = Segmento
-        fields = ['rango', 'mascara', 'direccion', 'subredes', 'reserv']
+        fields = ['rango', 'mascara']
 
 class SolicitudForm(forms.ModelForm):
     class Meta:
         model = Solicitudes
-        fields = ['usuario','solicitud','descripcion','ubicacion','completa']
+        fields = ['usuario','solicitud','descripcion','ubicacion',]
+
 
 
 class ReservaripForm(forms.ModelForm):

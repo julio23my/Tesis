@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head_title %} Dispositivo{% endblock %}
+{% block title_page %} Crear Dispositivo{% endblock %}
+
+{% block content %}
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+
+{# Display a form #}
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+{% bootstrap_form_errors form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-warning" style="text-align: center;">
+      <span style="color: #ffffff;">Guardar Dispositivo</span
+    </button>
+  {% endbuttons %}
+<div class="row">
+    <div class="col-md-9">
+      {% bootstrap_field form.dvt layout='horizontal' %}
+
+    </div>
+    <div class="col">
+    </div>
+  </div>
+<div class="row">
+    <div class="col">
+      {% bootstrap_field form.ipv4 layout='horizontal'%}
+
+    </div>
+    <div class="col">
+        {% bootstrap_field form.ipv6 layout='horizontal'%}
+    </div>
+  </div>
+<div class="row">
+    <div class="col">
+      {% bootstrap_field form.ssh layout='horizontal'%}
+    </div>
+    <div class="col">
+        {% bootstrap_field form.telnet layout='horizontal'%}
+    </div>
+  </div>
+<div class="row">
+    <div class="col">
+      {% bootstrap_field form.conf_t layout='horizontal'%}
+        {% bootstrap_field form.conf layout='horizontal'%}
+    </div>
+    <div class="col">
+      {% bootstrap_field form.ubicacion layout='horizontal'%}
+        {% bootstrap_field form.name layout='horizontal'%}
+        {% bootstrap_field form.responsable layout='horizontal'%}
+        {% bootstrap_field form.modelo layout='horizontal'%}
+        {% bootstrap_field form.serial layout='horizontal'%}
+        {% bootstrap_field form.marca layout='horizontal'%}
+    </div>
+  </div>
+
+</form>
+
+
+{% endblock %}

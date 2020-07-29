@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head_title %} Ubicacion{% endblock %}
+{% block title_page %} Añadir Ubicacion{% endblock %}
+
+{% block content %}
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+
+{# Display a form #}
+<form action="" method="post" class="form">
+  {% csrf_token %}
+{% bootstrap_form_errors form %}
+
+{% bootstrap_form form  %}
+
+{% buttons %}
+    <button type="submit" class="btn btn-warning" style="text-align: center;">
+      <span style="color: #ffffff;">Añadir Ubicacion</span>
+    </button>
+  {% endbuttons %}
+</form>
+
+{% endblock %}

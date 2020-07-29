@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head_title %} Dispositivo{% endblock %}
+{% block title_page %} Modificar Dispositivo{% endblock %}
+{% block content %}
+{# Load CSS and JavaScript #}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+
+{# Display a form #}
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+{% bootstrap_form_errors form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-warning" style="text-align: center;">
+      <span style="color: #ffffff;">Guardar Dispositivo</span
+    </button>
+  {% endbuttons %}
+<div class="row">
+    <div class="col-md-9">
+      {% bootstrap_field form.dvt layout='horizontal' %}
+
+    </div>
+    <div class="col">
+    </div>
+  </div>
+<div class="row">
+    <div class="col">
+      {% bootstrap_field form.ipv4 layout='horizontal'%}
+
+    </div>
+    <div class="col">
+        {% bootstrap_field form.ipv6 layout='horizontal'%}
+    </div>
+  </div>
+<div class="row">
+    <div class="col">
+      {% bootstrap_field form.ssh layout='horizontal'%}
+    </div>
+    <div class="col">
+        {% bootstrap_field form.telnet layout='horizontal'%}
+    </div>
+  </div>
+<div class="row">
+    <div class="col">
+      {% bootstrap_field form.conf_t layout='horizontal'%}
+        {% bootstrap_field form.conf layout='horizontal'%}
+    </div>
+    <div class="col">
+      {% bootstrap_field form.ubicacion layout='horizontal'%}
+        {% bootstrap_field form.name layout='horizontal'%}
+        {% bootstrap_field form.responsable layout='horizontal'%}
+        {% bootstrap_field form.modelo layout='horizontal'%}
+        {% bootstrap_field form.serial layout='horizontal'%}
+        {% bootstrap_field form.marca layout='horizontal'%}
+    </div>
+  </div>
+<div class="row">
+    <div class="col">
+
+    </div>
+
+  </div>
+
+{{ formset.management_form }}
+{#{% bootstrap_formset  formset show_label=False %}#}
+
+<div class="card shadow">
+ <div class="card-body" style="background: white;">
+        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+            <table class="table my-0" id="dataTable">
+
+                <thead>
+
+                    <tr>
+
+                        <td>Puerto</td>
+                        <td>Vlan</td>
+                        <td>Mac</td>
+                        <td>IPv4</td>
+                        <td>IPv6</td>
+                        <td>Activo</td>
+                        <td>Eliminar</td>
+                </tr>
+
+                </thead>
+                <tbody>
+
+                    {% for form in formset %}
+                    <tr>
+                        {% for field in form.visible_fields  %}
+            <td>{% bootstrap_field field show_label=False  %}
+                        </td>
+
+                {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</form>
+
+
+{% endblock %}
+
+{#<table class="table">#}
+{#            {{ formset.management_form }}#}
+{##}
+{#            {% for form in formset.forms %}#}
+{#                {% if forloop.first %}#}
+{#                    <thead>#}
+{#                    <tr>#}
+{#                        {% for field in form.visible_fields %}#}
+{#                            <th>{{ field.label|capfirst }}</th>#}
+{#                        {% endfor %}#}
+{#                    </tr>#}
+{#                    </thead>#}
+{#                {% endif %}#}
+{#                <tr class="{% cycle "row1" "row2" %} formset_row">#}
+{#                    {% for field in form.visible_fields %}#}
+{#                        <td>#}
+{#                             Include the hidden fields in the form #}
+{#                            {% if forloop.first %}#}
+{#                                {% for hidden in form.hidden_fields %}#}
+{#                                    {{ hidden }}#}
+{#                                {% endfor %}#}
+{#                            {% endif %}#}
+{#                            {{ field.errors.as_ul }}#}
+{#                            {{ field }}#}
+{#                        </td>#}
+{#                    {% endfor %}#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+
+
+

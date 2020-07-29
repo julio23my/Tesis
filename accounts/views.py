@@ -14,7 +14,7 @@ import paramiko
 # Create your views here.
 def home_view(request):
     context = {}
-    return render(request, 'accounts/home.html', context)
+    return render(request, 'accounts/home/home.html', context)
 
 
 @unauthenticated_user
@@ -26,11 +26,11 @@ def LoginPage(request):
         if user is not None:
             login(request, user)
             # Redirect to a success page.
-            return redirect('system')
+            return redirect('Dashboard')
         else:
             messages.info(request, 'Username or Password is Wrong')
     context = {}
-    return render(request, 'accounts/login.html',context)
+    return render(request, 'accounts/home/login.html', context)
 
 
 def LogoutUser(request):
@@ -49,13 +49,13 @@ def registration(request):
             messages.success(request, 'La cuenta fue Creada '+ user)
             return redirect('login')
     context = {'form':form}
-    return render(request, 'accounts/registration.html',context)
+    return render(request, 'accounts/home/registration.html', context)
 
 
 # @login_required(login_url='login')
 def HomeSystem(request):
     countsr = Device.objects.filter(dvt='R').count()
-    countsw = Device.objects.filter(dvt='SW').count()
+    countsw = Device.objects.filter(dvt='S').count()
     countse = Device.objects.filter(dvt='ED').count()
     countsrw = Device.objects.filter(dvt='RW').count()
     solicitud = Solicitudes.objects.filter(completa=False).all()
@@ -67,11 +67,11 @@ def HomeSystem(request):
         'solicitudes':solicitud
 
     }
-    return render(request, 'accounts/homesystem.html', context)
+    return render(request, 'accounts/home/homesystem.html', context)
 
 
 def SendConfiguration(request):
-    form = SendConfForm(request.POST)
+    form = SendConfForm(request.POST or None)
     if form.is_valid():
         obj = form.save()
         obj.user = request.user
@@ -104,7 +104,7 @@ def Ipv4Ipv6pasos(request):
     return render(request, 'accounts/ipv4toipv6/pasos.html', context)
 
 def SegmentacionCalculadoraipv6(request):
-    form = SegmentacionForm2(request.POST)
+    form = SegmentacionForm2(request.POST or None)
     objeto = None
     contar = 0
     if form.is_valid():
@@ -122,7 +122,7 @@ def SegmentacionCalculadoraipv6(request):
     return render(request, 'accounts/ipv4toipv6/segmentacion-calculadora.html', context)
 
 def SegmentacionCalculadora(request):
-    form = SegmentacionForm(request.POST)
+    form = SegmentacionForm(request.POST or None)
     objeto = None
     if form.is_valid():
         obj = form.save()
@@ -138,16 +138,17 @@ def SegmentacionCalculadora(request):
 
 
 def Solicitudcrear(request):
-    form = SolicitudForm(request.POST)
+    form = SolicitudForm(request.POST or None)
     if form.is_valid():
         obj = form.save()
         obj.user = request.user
         obj.save()
         form = SolicitudForm()
+        redirect('home')
     context = {
         "form": form
     }
-    return render(request, 'accounts/solicitud.html', context)
+    return render(request, 'accounts/solicitud/solicitud.html', context)
 
 
 
@@ -156,24 +157,30 @@ def Solicitudver(request, pk):
     context = {
         "objeto": obj
     }
-    return render(request, 'accounts/solicitud-vista.html', context)
+    return render(request, 'accounts/solicitud/solicitud-vista.html', context)
 
+def Solicitudf(request, pk):
+    obj = get_object_or_404(Solicitudes, pk=pk)
+    if obj:
+        obj.completa = True
+        obj.save()
+        redirect('Dashboard')
+        return None
+    return render(request, 'accounts/solicitud/solicitud-vista.html')
 
 def InventarioListaDevice(request):
     objeto = Device.objects.all()
     context = {
         "objetos":objeto,
     }
-    return render(request, 'accounts/inventario-lista.html', context)
+    return render(request, 'accounts/device/inventario-lista.html', context)
 
 def InventarioCrear(request):
     form = DeviceForm(request.POST or None, request.FILES or None)
     if form.is_valid():
-        obj = form.save()
-        obj.user = request.user
-        obj.save()
-        form = DeviceForm()
-    template_name = 'accounts/device-crear.html'
+        form.save()
+        return redirect('Inventario')
+    template_name = 'accounts/device/device-crear.html'
     context = {'form': form}
     return render(request, template_name, context)
 
@@ -184,8 +191,8 @@ def InventarioUpdates(request, pk):
     if form.is_valid() and formset.is_valid():
         formset.save()
         form.save()
-        return redirect('/dispositivo/')
-    template_name = 'accounts/device-edit.html'
+        return redirect('Inventario')
+    template_name = 'accounts/device/device-edit.html'
     context = {
         "form": form,
         "formset":formset
@@ -205,7 +212,7 @@ def IPCrear(request):
         obj = form.save()
         obj.user = request.user
         obj.save()
-        form = IpReservadaForm()
+        return redirect('ip')
     template_name = 'accounts/ipreservada/crear.html'
     context = {'form': form}
     return render(request, template_name, context)
@@ -215,7 +222,7 @@ def IPUpdates(request, pk):
     form = IpReservadaForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
-        return redirect('/ip/')
+        return redirect('ip')
     template_name = 'accounts/ipreservada/editar.html'
     context = {
         "form": form
@@ -237,7 +244,7 @@ def UbicacionCrear(request):
         obj.user = request.user
         obj.save()
         form = UbicacionForm()
-        redirect('Ubicacion Lista')
+        return redirect('Lista Ubicacion')
     template_name = 'accounts/ubicacion/crear.html'
     context = {'form': form}
     return render(request, template_name, context)
@@ -247,7 +254,7 @@ def UbicacionUpdate(request, pk):
     form = UbicacionForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
-        return redirect('/Ubicacion/')
+        return redirect('Lista Ubicacion')
     template_name = 'accounts/ubicacion/editar.html'
     context = {
         "form": form

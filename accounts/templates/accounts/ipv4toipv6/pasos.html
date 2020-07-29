@@ -19,7 +19,7 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h5><a></a>Paso 1: Metodos de IPv6</h5> <br>
+                <h4><a></a>Paso 1: Metodos de IPv6</h4> <br>
                 <p>En la actualidad existen miles de millones de dispositivos que utilizan IPv4. Así que pensar en una migración simultánea de IPv4 a IPv6 de todos estos dispositivos es inviable. En algunos casos, aunque se quiera migrar a IPv6, los dispositivos o el software pueden no admitir IPv6 o no tener soporte adecuado para IPv6. Por lo que la migración de IPv4 a IPv6 requerirá años incluso décadas. Afortunadamente, se han desarrollado diferentes mecanismos de transición que permiten una integración fluida de IPv4 e IPv6 y no requieren que la actualización de todos los nodos sea simultánea. Entre ellos cabe destacar:</p>
                 <ul>
                     <li>
@@ -36,6 +36,64 @@
             <div class ='col-auto'>
                 <img src="{% static 'assets2/img/ipv4medidoripv6.png' %}">
             </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+            <h5><a></a>Pilas duales o dual stack IPv4/IPv6</h5> <br>
+            <p>El método de integración mediante pilas duales o dual stack se basa en la utilización de un o varios nodos que tienen instaladas la pila de protocolos IPv4 y la pila IPv6 a la vez. Los dispositivos con ambas pilas, también denominados nodos IPv4/IPv6, pueden recibir y enviar tráfico a nodos que sólo soportan uno de los dos protocolos (nodos sólo IPv4 o sólo IPv6).La principal desventaja de este método es una disminución del rendimiento de los equipos de red, ya que tienen que mantener tablas de encaminamiento y rutas independientes para cada uno de los protocolos.</p>
+        </div>
+            <div class="col-auto">
+
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-md-9">
+            <h5><a></a>Túneles </h5> <br>
+            <p>Los túneles proporcionan un mecanismo que permite establecer conexiones IPv6 sobre una red IPv4 (y viceversa).
+Los túneles se utilizan cuando un equipo desea acceso a la red IPv6 existente. Para ello el equipo deberá crear un túnel a través de IPv4 con un router que tenga tanto acceso a IPv6 como IPv4. Este método se está utilizando en la actualidad por parte de algunos ISPs que sólo dan conexión IPv4 para que cualquiera pueda tener acceso a la red IPv6.
+También permiten unir redes IPv6 utilizando la infraestructura IPv4 existente.</p>
+        </div>
+            <div class="col-auto">
+
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-md-9">
+            <h5><a></a>Conversión entre IPv4 e IPv6 por medio de NAT-PT </h5> <br>
+            <p>En caso de que existen nodos o bien con IPv6 o bien con IPv4 de forma exclusiva, se puede usar el protocolo NAT-PT (Network Address Translation – Protocol Translation) para transformar paquetes IPv6 en paquetes IPv4 y viceversa.
+Este mecanismo es totalmente transparente para los nodos extremos de la conexión, sólo es necesario configurar un router, con soporta NAT-PT y el control de estado de las conexiones, que realiza la transformación de paquetes.
+NAT-PT es más complejo que el protocolo NAT de IPv4, ya que, además de traducir la dirección de origen, modifica íntegramente la cabecera de cada paquete IPv4/IPv6 manteniendo los datos de cada paquete intactos.
+Este método necesita también cambios a nivel de aplicación para controlar las peticiones de resolución de nombre en los servidores DNS.
+Solo se recomienda su uso como medida temporal, cuando no existe otra alternativa. </p>
+        </div>
+            <div class="col-auto">
+
+            </div>
+            </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <h4><a></a>Paso 2: Segmentacion IPv6</h4> <br>
+                <p>La segmentacion se utiliza para llevar un orden en concreto de red.
+                Esta misma tiene que tener un orden de segmentos diridigos dentro de la red, a traves de todas las localidades existentes. Al utilizar un calculadora segmentadora se puede
+                determinar la cantidad de subredes que se tendran</p>
+
+            </div>
+            <div class ='col-auto'>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <h4><a></a>Paso 3: Configuraciones</h4> <br>
+                <p> Enviar toda configuracion a los equipos principales de red.</p>
+
+            </div>
+            <div class ='col-auto'>
+            </div>
+
         </div>
     </div>
 </div>
