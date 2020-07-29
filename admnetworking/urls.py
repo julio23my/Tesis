@@ -39,7 +39,10 @@ urlpatterns = [
     path('ubicacion/', views.UbicacionLista, name='Lista Ubicacion'),
     path('ubicacion/crear', views.UbicacionCrear, name='Crear Ubicacion'),
     path('ubicacion/<int:pk>/', views.UbicacionUpdate, name='Editar Ubicacion'),
+    path('ubicacion/<int:pk>/b', views.UbicacionBorrar, name='Borrar Ubicacion'),
     path('sendconf/', views.SendConfiguration, name='sendconf'),
     path('solicitud-usuario-f/<int:pk>/', views.Solicitudf, name='Solicitud Cambio'),
+    path('inventario/<int:pk>/b', views.InventarioBorrar, name='Borrar Dispositivo'),
+    path('ip/<int:pk>/b', views.IPBorrar, name='Borrar Ip'),
 
 ]

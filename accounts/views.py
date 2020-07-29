@@ -195,7 +195,8 @@ def InventarioUpdates(request, pk):
     template_name = 'accounts/device/device-edit.html'
     context = {
         "form": form,
-        "formset":formset
+        "formset":formset,
+        "object":obj
     }
     return render(request, template_name, context)
 
@@ -225,7 +226,8 @@ def IPUpdates(request, pk):
         return redirect('ip')
     template_name = 'accounts/ipreservada/editar.html'
     context = {
-        "form": form
+        "form": form,
+        "object": obj
     }
     return render(request, template_name, context)
 
@@ -257,6 +259,41 @@ def UbicacionUpdate(request, pk):
         return redirect('Lista Ubicacion')
     template_name = 'accounts/ubicacion/editar.html'
     context = {
-        "form": form
+        "form": form,
+        "object":obj,
     }
     return render(request, template_name, context)
+
+
+def UbicacionBorrar(request, pk):
+    obj = get_object_or_404(Ubicacion, pk=pk)
+    obj.delete()
+    print('se borro')
+    return redirect('Lista Ubicacion')
+    context = {
+        "object": obj
+    }
+    return render(request, None, context)
+
+
+
+def InventarioBorrar(request, pk):
+    obj = get_object_or_404(Device, pk=pk)
+    obj.delete()
+    print('se borro')
+    return redirect('Inventario')
+    context = {
+        "object": obj
+    }
+    return render(request, None, context)
+
+
+def IPBorrar(request, pk):
+    obj = get_object_or_404(IpReservada, pk=pk)
+    obj.delete()
+    print('se borro')
+    return redirect('ip')
+    context = {
+        "object": obj
+    }
+    return render(request, None, context)

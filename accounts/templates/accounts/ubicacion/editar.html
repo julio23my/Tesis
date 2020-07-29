@@ -3,7 +3,7 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block head_title %} Ubicacion{% endblock %}
-{% block title_page %} Añadir Ubicacion{% endblock %}
+{% block title_page %} Modificar Ubicacion{% endblock %}
 
 {% block content %}
 {# Load CSS and JavaScript #}
@@ -24,9 +24,9 @@
 
 {% buttons %}
     <button type="submit" class="btn btn-warning" style="text-align: center;">
-      <span style="color: #ffffff;">Añadir Ubicacion</span>
+      <span style="color: #ffffff;">Modificar Ubicacion</span>
     </button>
   {% endbuttons %}
 </form>
-
+<a href="{% url 'Borrar Ubicacion' object.id %}" class="btn btn-warning "   >Eliminar Ubicacion</a>
 {% endblock %}
